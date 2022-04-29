@@ -5,11 +5,13 @@ import './style.css';
 
 const PokemonList = ({pokemons}) =>{
     return(
-        <Grid className="PokemonList">
-            {pokemons.map((pokemon,index)=>(
-                <PokemonCard pokemon={pokemon} key={index}/>
-            ))}
-        </Grid>
+        <div className="wrapper">
+            <Grid className="PokemonList">
+                {pokemons.map((pokemon,index)=>(
+                    <PokemonCard pokemon={pokemon} key={index}/>
+                ))}
+            </Grid>
+        </div>
     );
 }
 PokemonList.defaultProps = {

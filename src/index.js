@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './containers/App';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import {provider} from 'react-redux';
 import './index.css';
-import pokemonReducer from './reducers/pokemonReducer';
+import { pokemonReducer } from './reducers/pokemonReducer';
 import { logActions } from './middleware';
 
 const composedEnhancers = compose( 
