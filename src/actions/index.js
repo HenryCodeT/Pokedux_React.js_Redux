@@ -1,8 +1,9 @@
-import axios from 'axios';
-import { getPokemons } from '../api/getPokemons';
-
-
-import { SET_POKEMONS, SET_ERROR, CLEAR_ERROR } from './types';
+import { 
+    SET_POKEMONS, 
+    SET_ERROR, 
+    CLEAR_ERROR, 
+    FETCH_POKEMONS  } 
+    from './types';
 
 export const setPokemons = (payload) => ({
     type: SET_POKEMONS,
@@ -20,22 +21,7 @@ export const clearError = (payload) => ({
 });
 
 
-export const getPokemonWithDetails = () => (dispatch) =>{
-  getPokemons()
-      .then((res) => {
-        console.log(res);
-        const pokemonList = res.results;
-        return Promise.all(
-        pokemonList.map((pokemon) => axios.get(pokemon.url))
-        )
-      })
-      .then(pokemonsResponse => {
-        console.log(pokemonsResponse);
-        const pokemonData = pokemonsResponse.map(response => response.data);
-        console.log(pokemonData);
-        dispatch(setPokemons(pokemonData));
-      })
-      .catch((error) => {
-        dispatch(setError({ message: 'Ocurrió un error' , error}));
-      });
-};
+export const fetchPokemons = (payload) => ({
+  type: FETCH_POKEMONS,
+  payload,
+});

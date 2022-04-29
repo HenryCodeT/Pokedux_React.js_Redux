@@ -2,15 +2,22 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Searcher from '../../components/Searcher';
 import PokemonList from '../../components/PokemonList';
-import { getPokemonWithDetails } from '../../actions';
+import { fetchPokemons, setError } from '../../actions';
 import './styles.css';
+import { getPokemons } from '../../api/getPokemons';
 
 function Home() {
   const pokemons = useSelector((state) => state.list);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPokemonWithDetails())
+    getPokemons()
+      .then((res) => {
+        dispatch(fetchPokemons(res.results));
+      })
+      .catch((error) => {
+        dispatch(setError({ message: 'Ocurrió un error', error }));
+      });
   }, []);
 
   return (
